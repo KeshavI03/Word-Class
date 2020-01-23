@@ -37,13 +37,16 @@ public class Word {
 	public int numReductions() {
 		int numRed = 0;
 		if(word.charAt(word.length()-1) == 'e' ||
-				((word.charAt(word.length()-3) != 'e' && word.charAt(word.length()-3) != 's') && word.substring(word.length()-2).equals("es") || (word.substring(word.length()-2).equals("ed") && word.charAt(word.length()-3) != 't')) || word.substring(word.length()-2).equals("ao"))                                      
+				((word.charAt(word.length()-3) != 'e' && word.charAt(word.length()-3) != 's') && word.substring(word.length()-2).equals("es") || (word.substring(word.length()-2).equals("ed") && word.charAt(word.length()-3) != 't')) ||
+				(word.charAt(word.length()-2) == 'a' && (word.charAt(word.length()-1) == 'o' || word.charAt(word.length()-1) == 'u')))                                     
 			numRed++;
 		
+		if(word.substring(word.length()-2).equals("sm"))
+			numRed--;
 		
 		for(int i = 0; i < word.length()-2; i++) 
 			if(isVowel(i) && isVowel(i+1)) 
-				if(!(word.charAt(i) == 'i' && (word.charAt(i+1) == 'a' || word.charAt(i+1) == 'o')) && word.charAt(i+1) != 'y')
+				if(!(word.charAt(i) == 'i' && (word.charAt(i+1) == 'a' || (word.charAt(i+1) == 'o' && word.charAt(i-1) != 't'))) && word.charAt(i+1) != 'y')
 					numRed++;
 		return numRed;
 	}
